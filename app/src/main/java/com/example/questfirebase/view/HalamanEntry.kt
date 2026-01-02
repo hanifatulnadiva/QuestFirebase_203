@@ -22,6 +22,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.questfirebase.view.viewmodel.EntryViewModel
 import com.example.questfirebase.view.viewmodel.PenyediaViewModel
@@ -79,7 +80,7 @@ fun EntrySiswaBody(
 
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
-        modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
+        modifier = Modifier.padding(top = 80.dp)
     ) {
         FormTambahSiswa(
             detailSiswa = uiStateSiswa.detailSiswa,
@@ -105,8 +106,10 @@ fun FormTambahSiswa(
     enabled: Boolean=true
 ){
     Column (
-        modifier=modifier,
+        modifier=modifier
+            .padding(dimensionResource(R.dimen.padding_large)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
+
     ){
         OutlinedTextField(
             value = detailSiswa.nama,
