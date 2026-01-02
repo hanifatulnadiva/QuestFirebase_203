@@ -1,5 +1,6 @@
 package com.example.questfirebase.view
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -52,6 +53,14 @@ fun HalamanHome(
             }
         }
     ){
-
+        isiRuang->
+        HomeBody(
+            statusUiSiswa = viewModel.statusUiSiswa,
+            onSiswaClick =navigatetoItemUpdate,
+            retryAction = viewModel::loadSiswa,
+            modifier=modifier
+                .padding(isiRuang)
+                .fillMaxSize()
+        )
     }
 }
