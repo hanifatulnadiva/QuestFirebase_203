@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,6 +27,7 @@ import com.example.questfirebase.view.viewmodel.EntryViewModel
 import com.example.questfirebase.view.viewmodel.PenyediaViewModel
 import com.example.questfirebase.R
 import com.example.questfirebase.modeldata.DetailSiswa
+import com.example.questfirebase.modeldata.UIStateSiswa
 import com.example.questfirebase.view.route.DestinasiEntry
 import kotlinx.coroutines.launch
 
@@ -64,6 +67,33 @@ fun HalamanEntry(
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
         )
+    }
+}
+@Composable
+fun EntrySiswaBody(
+    uiStateSiswa: UIStateSiswa,
+    onSiswaValueChange: (DetailSiswa) -> Unit,
+    onSaveClick:()->Unit,
+    modifier: Modifier= Modifier
+){
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
+        modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
+    ) {
+        FormTambahSiswa(
+            detailSiswa = uiStateSiswa.detailSiswa,
+            onValueChange = onSiswaValueChange,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = onSaveClick,
+            enabled = uiStateSiswa.isEntryValid,
+            shape = MaterialTheme.shapes.small,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.btn_submit))
+        }
     }
 }
 
