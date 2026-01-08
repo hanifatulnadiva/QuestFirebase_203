@@ -41,6 +41,54 @@ import com.example.questfirebase.view.viewmodel.PenyediaViewModel
 import com.example.questfirebase.view.viewmodel.StatusUIDetail
 import kotlinx.coroutines.launch
 
+
+@Composable
+fun DetailDataSiswa(
+    siswa: Siswa?,
+    modifier: Modifier = Modifier
+){
+    Card(
+        modifier= Modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    ){
+        Column(
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium))
+        ) {
+            BarisDetailData(
+                labelResID = R.string.nama1,
+                itemDetail = siswa!!.nama,
+                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium))
+            )
+            BarisDetailData(
+                labelResID = R.string.alamat1,
+                itemDetail = siswa.alamat,
+                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium))
+            )
+            BarisDetailData(
+                labelResID = R.string.telpon1,
+                itemDetail = siswa.telpon,
+                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium))
+            )
+        }
+    }
+}
+
+@Composable
+private fun BarisDetailData(
+    @StringRes labelResID :Int, itemDetail:String, modifier: Modifier= Modifier
+){
+    Row(modifier=modifier){
+        Text(stringResource(labelResID))
+        Spacer(modifier = Modifier.weight(1f))
+        Text(text = itemDetail, fontWeight = FontWeight.Bold)
+    }
+}
 @Composable
 private fun DeleteConfirmationDialog(
     onDeleteConfirm:()-> Unit,
