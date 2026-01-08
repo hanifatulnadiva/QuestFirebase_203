@@ -22,7 +22,7 @@ class FirebaseRepositorySiswa: RepositorySiswa{
                 Siswa(
                     id= doc.getLong("id")?.toLong()?:0,
                     nama = doc.getString("nama")?:"",
-                    alamat = doc.getString("allamat")?:"",
+                    alamat = doc.getString("alamat")?:"",
                     telpon = doc.getString("telpon")?:""
                 )
             }
@@ -50,7 +50,7 @@ class FirebaseRepositorySiswa: RepositorySiswa{
                 Siswa(
                     id= doc.getLong("id")?.toLong()?:0,
                     nama = doc.getString("nama")?:"",
-                    alamat = doc.getString("allamat")?:"",
+                    alamat = doc.getString("alamat")?:"",
                     telpon = doc.getString("telpon")?:""
                 )
             }
