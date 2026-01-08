@@ -7,6 +7,7 @@ import kotlinx.coroutines.tasks.await
 interface RepositorySiswa {
     suspend fun getDataSiswa():List<Siswa>
     suspend fun postDataSiswa(siswa: Siswa)
+
 }
 
 class FirebaseRepositorySiswa: RepositorySiswa{
@@ -38,4 +39,24 @@ class FirebaseRepositorySiswa: RepositorySiswa{
         )
         docRef.set(data).await()
     }
+
+    override suspend fun getSatuSiswa(id: Long): Siswa? {
+        return try{
+            val query = collection.whereEqualTo("id", id).get().await()
+            query.documents.firstOrNull()?.let {
+                doc->
+                Siswa(
+                    id= doc.getLong("id")?.toLong()?:0,
+                    nama = doc.getString("nama")?:"",
+                    alamat = doc.getString("allamat")?:"",
+                    telpon = doc.getString("telpon")?:""
+                )
+            }
+        }catch (e: Exception){
+            println("gagal baca data siswa: ${e.message}")
+            null
+        }
+    }
+
+
 }
