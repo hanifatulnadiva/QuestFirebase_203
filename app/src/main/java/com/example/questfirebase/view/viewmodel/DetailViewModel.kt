@@ -46,5 +46,13 @@ class DetailViewModel (savedStateHandle: SavedStateHandle, private  val reposito
             }
         }
     }
-
+    suspend fun  hapusSatuSiswa(){
+        try{
+            repositorySiswa.hapusSatuSiswa(idSiswa)
+            println("Sukses hapus data:$idSiswa")
+        }
+        catch (e: Exception){
+            println("gagal menghapus data:${e.message}")
+        }
+    }
 }
