@@ -41,6 +41,57 @@ import com.example.questfirebase.view.viewmodel.PenyediaViewModel
 import com.example.questfirebase.view.viewmodel.StatusUIDetail
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HalamanDetailSiswa (
+    navigateToEditItem:(Int)->Unit,
+    navigateBack:()->Unit,
+    modifier: Modifier= Modifier,
+    viewModel: DetailViewModel= viewModel(factory = PenyediaViewModel.factory)
+){
+    Scaffold(
+        topBar ={
+            SiswaTopAppBar(
+                title = stringResource(DestinasiDetail.titleRes),
+                canNavigateBack = true,
+                navigateUp = navigateBack
+            )
+        },
+        floatingActionButton = {
+            val uiState=viewModel.statusUIDetail
+            FloatingActionButton(
+                onClick = {
+                    when(uiState){is StatusUIDetail.Success->
+                        navigateToEditItem(uiState.satusiswa!!.id.toInt())
+                        else -> {}
+                    }
+                },
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_large))
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "update"
+                )
+            }
+        }, modifier = modifier
+    ) {
+            isiRuang->
+        val coroutineScope= rememberCoroutineScope()
+        BodyDetailDataSiswa(
+            statusUIDetail = viewModel.statusUIDetail,
+            onDelete = {
+                coroutineScope.launch {
+                    viewModel.hapusSatuSiswa()
+                    navigateBack()
+                }
+            },
+            modifier = modifier
+                .padding(isiRuang)
+                .verticalScroll(rememberScrollState())
+        )
+    }
+}
 
 @Composable
 private fun BodyDetailDataSiswa(
