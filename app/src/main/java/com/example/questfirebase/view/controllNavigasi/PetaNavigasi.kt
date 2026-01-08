@@ -63,6 +63,13 @@ fun HostNavigasi(
             HalamanDetailSiswa(navigateToEditItem = {navController.navigate("${DestinasiUpdate.route}/$it")},
                 navigateBack = {navController.navigate(DestinasiHome.route)})
         }
-
+        composable (DestinasiUpdate.routeWithArgs, arguments = listOf(navArgument(DestinasiUpdate.itemIdArg){
+            type= NavType.StringType
+        })){
+            HalamanEdit(
+                navigationBack = {navController.navigate(DestinasiHome.route)},
+                onNavigateUp = {navController.navigateUp()}
+            )
+        }
     }
 }
